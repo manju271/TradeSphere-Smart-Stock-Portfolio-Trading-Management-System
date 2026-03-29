@@ -1,63 +1,76 @@
+
 import React from "react";
+import { motion } from "framer-motion";
 
 function Navbar() {
+  const primeBlue = "#007bff";
+
   return (
-    <nav
-      class="navbar navbar-expand-lg border-bottom"
-      style={{ backgroundColor: "#FFF" }}
+    <motion.nav 
+      initial={{ y: -50, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.5 }}
+      className="navbar navbar-expand-lg border-bottom sticky-top bg-primary shadow-sm"
     >
-      <div class="container p-2">
-        <a class="navbar-brand" href="#">
+      <div className="container py-1">
+        {/* Logo with Hover Scale */}
+        <motion.a 
+          whileHover={{ scale: 1.05 }}
+          className="navbar-brand d-flex align-items-center" 
+          href="/"
+        >
           <img
-            src="media/images/logo.svg"
-            style={{ width: "25%" }}
+            src="media\images\logo.jpeg"
             alt="Logo"
+            style={{ width: "160px", borderRadius: "8px" }} 
           />
-        </a>
+        </motion.a>
+
         <button
-          class="navbar-toggler"
+          className="navbar-toggler border-0"
           type="button"
           data-bs-toggle="collapse"
           data-bs-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
         >
-          <span class="navbar-toggler-icon"></span>
+          <span className="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <form class="d-flex" role="search">
-            <ul class="navbar-nav mb-lg-0">
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">
-                  Signup
+
+        <div className="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul className="navbar-nav ms-auto mb-2 mb-lg-0 align-items-center">
+            {["Home","About", "Product", "Pricing", "Support"].map((item, index) => (
+              <motion.li 
+                key={index}
+                whileHover={{ y: -2 }}
+                className="nav-item px-2"
+              >
+                <a className="nav-link fw-semibold text-dark" href={`/${item.toLowerCase()}`}>
+                  {item}
                 </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link active" href="#">
-                  About
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link active" href="#">
-                  Product
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link active" href="#">
-                  Pricing
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link active" href="#">
-                  Support
-                </a>
-              </li>
-            </ul>
-          </form>
+              </motion.li>
+            ))}
+            
+            {/* Highlighted Signup Button */}
+            <motion.li 
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="nav-item ms-lg-3"
+            >
+              <a 
+                className="nav-link btn text-white px-4 shadow-sm" 
+                style={{ 
+                  backgroundColor: primeBlue, 
+                  borderRadius: "20px",
+                  fontSize: "14px"
+                }} 
+                href="/signup"
+              >
+                Signup
+              </a>
+            </motion.li>
+          </ul>
         </div>
       </div>
-    </nav>
+    </motion.nav>
   );
 }
 
